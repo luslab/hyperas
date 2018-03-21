@@ -5,7 +5,7 @@ import sys
 
 import nbformat
 import numpy as np
-from hyperopt import fmin
+from hyperopt.fmin import fmin as fmin_function
 from nbconvert import PythonExporter
 
 from .ensemble import VotingModel
@@ -114,7 +114,7 @@ def base_minimizer(model, data, functions, algo, max_evals, trials,
     try:
         # for backward compatibility.
         return (
-            fmin(keras_fmin_fnct,
+            fmin_function(keras_fmin_fnct,
                  space=get_space(),
                  algo=algo,
                  max_evals=max_evals,
@@ -127,7 +127,7 @@ def base_minimizer(model, data, functions, algo, max_evals, trials,
         pass
 
     return (
-        fmin(keras_fmin_fnct,
+        fmin_function(keras_fmin_fnct,
              space=get_space(),
              algo=algo,
              max_evals=max_evals,
